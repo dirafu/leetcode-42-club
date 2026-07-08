@@ -6,13 +6,21 @@ private:
     typedef std::vector<int>::iterator It;
 public:
     int majorityElement(std::vector<int>& nums) {
-      std::map<int, int> freq;
+      int cand;
+      int k = 0;
       for (It it = nums.begin(); it != nums.end(); ++it) {
-        if (++freq[*it] > (nums.size() / 2)) {
-          return (*it);
+        if (k) {
+          if (*it == cand)
+            ++k;
+          else
+            --k;
+        }
+        else {
+          cand = *it;
+          ++k;
         }
       }
-      return (0);
+      return (cand);
     }
 };
 
