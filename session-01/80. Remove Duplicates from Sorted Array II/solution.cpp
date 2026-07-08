@@ -1,40 +1,28 @@
 #include <vector>
-#include <stdexcept>
-#include <climits>
 
 class Solution {
 private:
     typedef std::vector<int>::iterator It;
-    void shiftLeft(std::vector<int>& nums, int shift_amount, It begin, It end) {
-      It target;
-      if (shift_amount <= std::distance(nums.begin(), begin))
-        target = begin - shift_amount;
-      else
-        throw (std::runtime_error("out of bounds array shift attempt"));
-      for (It it = begin; it != end; ++it)
-        *target++ = *it;
-    }
 public:
     int removeDuplicates(std::vector<int>& nums) {
       int k = nums.size();
       int repetition_n = 0;
-      It it = nums.begin();
-      for (int i = 0; i < k; ++i)
-      {
+      It write_head = nums.begin();
+      It read_head = write_head;
+      for (; read_head != nums.end(); ++read_head) {
         int prev;
-        if (it != nums.begin()) {
-          if (prev != *it)
+        if (read_head != nums.begin()) {
+          if (*read_head != prev)
             repetition_n = 0;
         }
-        if (++repetition_n > 2) {
-          while (i < k && *it == prev) {
-            shiftLeft(nums, 1, it + 1, nums.begin() + k--);
-          }
-          i--;
-          continue;
-        }
-        prev = *it;
-        ++it;
+        ++repetition_n;
+        if (write_head != read_head)
+          *write_head = *read_head;
+        prev = *read_head;
+        if (repetition_n > 2)
+          --k;
+        else
+          ++write_head;
       }
       return (k);
     }
@@ -44,7 +32,6 @@ public:
 int main(void)
 {
   Solution test;
-  // std::vector<int> test_vec{0,0,1,1,1,1,2,3,3};
   std::vector<int> test_vec{0,0,1,1,1,1,2,3,3,3,3,3,3,3};
   int k;
   std::cout << (k = test.removeDuplicates(test_vec)) << std::endl;
