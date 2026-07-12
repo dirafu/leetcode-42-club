@@ -9,37 +9,30 @@ private:
 public:
     void rotate(std::vector<int>& nums, int k) {
       It it = nums.begin();
+      k = k % nums.size();
       int tmp_n;
       int tmp_n_plus1;
       int distance;
-      if (nums.size() % k)
-      {
-        do {
-          tmp_n = *it;
-          distance = std::distance(nums.begin(), it) + k;
-          if (distance > nums.size())
-            it = nums.begin() + distance % k;
-          else
-            it += k;
-          *it = tmp_n;
-          tmp_n = tmp_n_plus1;
-        } while (it != nums.begin());
-        
-        it += k;
-        tmp_n_plus1 = *it;
-        *it = tmp_n;
-        tmp_n = tmp_n_plus1;
-        while (it != nums.begin())
+        int i = 0;
+        int elements_moved = 0;
+        while (elements_moved < nums.size())
         {
-          tmp_n_plus1 = *it;
-          distance = std::distance(nums.begin(), it) + k;
-          if (distance > nums.size())
-            it = nums.begin() + distance % k;
-          else
-            it += k;
-          *it = tmp_n;
-          tmp_n = tmp_n_plus1;
-        }
+          It start_it = nums.begin() + i;
+          it = start_it;
+          tmp_n = *it;
+            do {
+            tmp_n_plus1 = *it;
+            *it = tmp_n;
+            distance = std::distance(nums.begin(), it) + k;
+            if (distance > nums.size() - 1)
+              it = nums.begin() + (distance % nums.size());
+            else
+              it += k;
+            tmp_n = tmp_n_plus1;
+            elements_moved++;
+            *start_it = tmp_n;
+          } while (it != start_it );
+          i++;
       }
     }
 };
