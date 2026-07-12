@@ -1,5 +1,8 @@
 #include <vector>
 
+//space complexity: O(1)
+//time complexity: O(n)
+
 class Solution {
 private:
     typedef std::vector<int>::iterator It;

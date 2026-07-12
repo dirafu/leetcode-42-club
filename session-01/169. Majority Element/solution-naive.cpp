@@ -1,26 +1,21 @@
 #include <vector>
 #include <map>
 
+//space complexity: O(n)
+//time complexity: O(nlog(n))
+
 class Solution {
 private:
     typedef std::vector<int>::iterator It;
 public:
     int majorityElement(std::vector<int>& nums) {
-      int cand;
-      int k = 0;
+      std::map<int, int> freq;
       for (It it = nums.begin(); it != nums.end(); ++it) {
-        if (k) {
-          if (*it == cand)
-            ++k;
-          else
-            --k;
-        }
-        else {
-          cand = *it;
-          ++k;
+        if (++freq[*it] > (nums.size() / 2)) {
+          return (*it);
         }
       }
-      return (cand);
+      return (0);
     }
 };
 
