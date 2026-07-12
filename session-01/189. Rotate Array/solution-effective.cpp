@@ -1,6 +1,6 @@
 #include <vector>
 
-//space complexity: O(n)
+//space complexity: O(1)
 //time complexity: O(n)
 
 class Solution {
