@@ -1,4 +1,4 @@
-//space complexity: O(n)
+//space complexity: O(1) (subject says: "The output array does not count as extra space for space complexity analysis")
 //time complexity: O(n)
 
 #include <vector>
@@ -7,25 +7,14 @@
 class Solution {
 public:
     std::vector<int> productExceptSelf(std::vector<int>& nums) {
-        std::vector<int> pref;
-        pref.reserve(nums.size() - 1);
-        std::vector<int> suff;
-        suff.reserve(nums.size() - 1);
-
-        for (int i = 0, product = 1; i < nums.size() - 1; ++i){
-          product *= nums[i];
-          pref.insert(pref.end(), product);
-        }
+        std::vector<int> result(nums.size(), 1);
         for (int i = nums.size() - 1, product = 1; i > 0; --i){
           product *= nums[i];
-          suff.insert(suff.end(), product);
+          result[i - 1] = product;
         }
-        std::vector<int> result(nums.size(), 1);
-        for (int i = 0; i < nums.size(); ++i){
-          if (i < nums.size() - 1)
-            result[i] *= suff[suff.size() - 1 - i];
-          if (i)
-            result[i] *= pref[i - 1];
+        for (int i = 0, product = 1; i < nums.size(); ++i){
+          result[i] *= product;
+          product *= nums[i];
         }
         return result;
     }
