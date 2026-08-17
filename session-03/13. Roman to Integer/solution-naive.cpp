@@ -7,7 +7,7 @@
 class Solution {
 public:
   int romanToInt(std::string s) {
-    std::unordered_map<char, int> alphabet = {
+    static std::unordered_map<char, int> alphabet = {
       {'I', 1},
       {'V', 5},
       {'X', 10},
