@@ -1,5 +1,5 @@
-//space complexity: O(...)
-//time complexity: O(...)
+//space complexity: O(1)
+//time complexity: O(n)
 
 #include <string>
 #include <unordered_map>
