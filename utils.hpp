@@ -1,9 +1,10 @@
 #include <ostream>
 #include <vector>
 
-std::ostream& operator<<(std::ostream& lhs, const std::vector<int>& rhs)
+template <typename T>
+std::ostream& operator<<(std::ostream& lhs, const std::vector<T>& rhs)
 {
-  std::vector<int>::const_iterator it;
+  typename std::vector<T>::const_iterator it;
   lhs << '[';
   for (it = rhs.begin(); it != rhs.end(); ++it){
     if (it != rhs.begin())
