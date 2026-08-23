@@ -1,5 +1,5 @@
-//space complexity: O(...)
-//time complexity: O(...)
+//space complexity: O(n*m)
+//time complexity: O(n*m)
 
 #include <vector>
 #include <algorithm>
